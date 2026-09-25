@@ -39,20 +39,24 @@ on:
           per-GB service, and measured no better than http here — opt in only.
         default: http
       codec:
-        description: HTTP stream codec. h264 serves /stream.avcc, which emits nothing on
+        description:
+          HTTP stream codec. h264 serves /stream.avcc, which emits nothing on
           GitHub runners; mjpeg is what actually streams.
         default: mjpeg
       max_dimension:
-        description: Cap the captured width/height in pixels; 0 keeps native resolution.
+        description:
+          Cap the captured width/height in pixels; 0 keeps native resolution.
           640 was measurably snappier but visibly soft on a retina display, where the
           preview is drawn at ~2x CSS pixels. 900 keeps it sharp.
         default: "900"
       video_fps:
-        description: MJPEG frame rate. serve-sim defaults to 60, which over a tunnel
+        description:
+          MJPEG frame rate. serve-sim defaults to 60, which over a tunnel
           stutters more than a reliably delivered 30 and doubles encode CPU.
         default: "30"
       video_quality:
-        description: MJPEG quality 0.05-1. Lower means fewer bytes per frame, but it shows
+        description:
+          MJPEG quality 0.05-1. Lower means fewer bytes per frame, but it shows
           as compression artefacts rather than softness — reduce fps or dimension first.
         default: "0.7"
       export_app:
@@ -64,7 +68,8 @@ on:
           <url>/agent-device, so a coding agent on your machine can drive the app.
         default: "false"
       agent_device_version:
-        description: agent-device version to install. Pin it — the client and the
+        description:
+          agent-device version to install. Pin it — the client and the
           proxied daemon should match.
         default: 0.20.1
       scheme:
@@ -198,6 +203,8 @@ jobs:
             --port "$PREVIEW_PORT"
             --max-dimension '${{ inputs.max_dimension }}'
             --video-fps '${{ inputs.video_fps }}'
+            --panes none
+            --fit
           )
 
           if [ '${{ inputs.transport }}' = 'webrtc' ] && [ -n "$TURN_KEY_ID" ]; then
