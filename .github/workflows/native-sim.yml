@@ -203,7 +203,6 @@ jobs:
             --port "$PREVIEW_PORT"
             --max-dimension '${{ inputs.max_dimension }}'
             --video-fps '${{ inputs.video_fps }}'
-            --panes none
             --fit
           )
 
